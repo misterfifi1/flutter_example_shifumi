@@ -34,8 +34,8 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(32.0),
         child: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
             Text(
               'Your name',
               style: Theme.of(context).textTheme.headline,
@@ -50,28 +50,49 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Expanded(
-                    child : IconButton(
-                      onPressed: () {
-                        debugPrint("Starred Me!");
-                      },
-                      color: Colors.orangeAccent,
-                      icon: new Image.asset('assets/cpu.png'),
-                      disabledColor: Colors.grey,
-                      iconSize: 250,
-                      highlightColor: Colors.black38,
-                    ),
+                    child : Container(
+                        color: Colors.indigoAccent,
+                        child: Column(
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: () {
+                                debugPrint("Starred Me!");
+                              },
+                              color: Colors.orangeAccent,
+                              icon: new Image.asset('assets/cpu.png'),
+                              iconSize: 250,
+                              disabledColor: Colors.grey,
+                              highlightColor: Colors.black38,
+                            ),
+                            Text(
+                              'HUMAN VS CPU',
+                              style: Theme.of(context).textTheme.body1,
+                            ),
+                          ],
+                        ),
+                      ),
                     flex: 2,
                   ),
                   Expanded(
-                    child : IconButton(
-                      onPressed: () {
-                        debugPrint("Starred Me!");
-                      },
-                      color: Colors.orangeAccent,
-                      icon: new Image.asset('assets/cpu.png'),
-                      iconSize: 250,
-                      disabledColor: Colors.grey,
-                      highlightColor: Colors.black38,
+                    child : Container(
+                      child: Column(
+                        children: <Widget>[
+                          IconButton(
+                            onPressed: () {
+                              debugPrint("Starred Me!");
+                            },
+                            color: Colors.orangeAccent,
+                            icon: new Image.asset('assets/cpu.png'),
+                            iconSize: 250,
+                            disabledColor: Colors.grey,
+                            highlightColor: Colors.black38,
+                          ),
+                          Text(
+                            'CPU VS CPU',
+                            style: Theme.of(context).textTheme.body1,
+                          ),
+                        ],
+                      ),
                     ),
                     flex: 2,
                   ),
