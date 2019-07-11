@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shifumi/model/GameType.dart';
-import 'package:shifumi/util/CustomShape.dart';
+import 'package:shifumi/shape/CustomShape.dart';
 import 'package:shifumi/util/HexColor.dart';
+import 'package:shifumi/widget/GameSelectionWidget.dart';
 
-import 'UsernameForm.dart';
+import 'package:shifumi/widget/UsernameForm.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -60,134 +61,41 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Expanded(
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                  child: Text(
-                    'Select your Game',
-                    style: Theme.of(context).textTheme.headline,
+              child: Row (
+                children: <Widget>[
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 5.0),
+                      child: Text(
+                        'Select your mode',
+                        style: Theme.of(context).textTheme.headline,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
               flex: 1,
             ),
             Expanded(
-              child: Container(
-                foregroundDecoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/img/player.png'))),
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                    child: Container(
-                      child: ClipPath(
-                        clipper: CustomShape(),
-                        //clipBehavior: Clip.antiAliasWithSaveLayer,
-                        child: Container(
-                          color: Colors.white70,
-                          /*
-                          foregroundDecoration: BoxDecoration(
-                            boxShadow: [
-                              new BoxShadow(
-                                color: Colors.white70,
-                                blurRadius: 60.0,
-                                spreadRadius: 10.0
-                              )
-                            ]
-                          ),
-                          */
-                          height: 300,
-                          width: 300.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    EdgeInsets.only(left: 20.0, bottom: 10),
-                                child: RaisedButton(
-                                    color: HexColor("4EADF3"),
-                                    child: Text(
-                                      'Play Now!',
-                                      style: Theme.of(context).textTheme.body1,
-                                    ),
-                                    onPressed: () {
-                                      debugPrint("Starred Me!");
-                                    },
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                        new BorderRadius.circular(8.0))),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              child: GameSelectionWidget(
+                onPressedCallback: () {
+                  debugPrint("Tapped Me");
+                },
+                buttonTitle: "Play Now!",
+                foregroundImage: AssetImage('assets/img/player.png'),
               ),
               flex: 3,
             ),
             Expanded(
-              child: Container(
-                foregroundDecoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/img/cpu_player.png'))
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                    child: Container(
-                      child: ClipPath(
-                        clipper: CustomShape(),
-                        //clipBehavior: Clip.antiAliasWithSaveLayer,
-                        child: Container(
-                          color: Colors.white70,
-                          /*
-                          foregroundDecoration: BoxDecoration(
-                            boxShadow: [
-                              new BoxShadow(
-                                color: Colors.white70,
-                                blurRadius: 60.0,
-                                spreadRadius: 10.0
-                              )
-                            ]
-                          ),
-                          */
-                          height: 300,
-                          width: 300.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                EdgeInsets.only(left: 20.0, bottom: 10),
-                                child: RaisedButton(
-                                    color: HexColor("4EADF3"),
-                                    child: Text(
-                                      'Watch Game',
-                                      style: Theme.of(context).textTheme.body1,
-                                    ),
-                                    onPressed: () {
-                                      debugPrint("Starred Me!");
-                                    },
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                        new BorderRadius.circular(8.0))),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              child: GameSelectionWidget(
+                onPressedCallback: () {
+                  debugPrint("Tapped Me");
+                },
+                buttonTitle: "Watch Game",
+                foregroundImage: AssetImage('assets/img/cpu_player.png'),
               ),
               flex: 3,
-            ),
+            )
           ],
         )),
       ),

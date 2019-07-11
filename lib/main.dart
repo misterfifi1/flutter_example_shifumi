@@ -16,9 +16,16 @@ class ShifumiApp extends StatelessWidget {
         backgroundColor: Colors.orange,
         textTheme: TextTheme(
           headline: TextStyle(
-              fontSize: 36.0,
+              fontSize: 24.0,
               fontWeight: FontWeight.bold,
-              color: Colors.white
+              color: Colors.white,
+            shadows: [
+              Shadow(
+                blurRadius: 8.0,
+                color: Colors.white70,
+                offset: Offset(-8.0, -8.0),
+              ),
+            ],
           ),
           title: TextStyle(
               fontSize: 24.0,
@@ -29,6 +36,12 @@ class ShifumiApp extends StatelessWidget {
               fontSize: 12.0,
               color: Colors.white
           ),
+          subhead: TextStyle(
+            fontSize: 12.0,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic
+          )
         )
       ),
 
