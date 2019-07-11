@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shifumi/page/home/Home.dart';
+import 'package:shifumi/page/HomePage.dart';
 
 void main() => runApp(ShifumiApp());
 
@@ -14,6 +14,7 @@ class ShifumiApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         backgroundColor: Colors.orange,
+        errorColor: Colors.redAccent,
         textTheme: TextTheme(
           headline: TextStyle(
               fontSize: 24.0,
@@ -28,9 +29,9 @@ class ShifumiApp extends StatelessWidget {
             ],
           ),
           title: TextStyle(
-              fontSize: 24.0,
+              fontSize: 20.0,
               fontStyle: FontStyle.italic,
-              color: Colors.white
+              color: Theme.of(context).accentColor
           ),
           body1: TextStyle(
               fontSize: 12.0,

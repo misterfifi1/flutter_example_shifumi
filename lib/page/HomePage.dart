@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shifumi/model/GameType.dart';
-import 'package:shifumi/shape/CustomShape.dart';
 import 'package:shifumi/util/HexColor.dart';
+import 'package:shifumi/util/Util.dart';
 import 'package:shifumi/widget/GameSelectionWidget.dart';
-
-import 'package:shifumi/widget/UsernameForm.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -19,16 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String username = "misterfifi";
-
-  void _selectGame(GameType selectedGame) {
-    setState(() {
-      username = "";
-    });
-  }
-
-  //F2AA52
-  //EF4D6C
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +32,7 @@ class _HomePageState extends State<HomePage> {
             end: Alignment.bottomLeft,
             // Add one stop for each color. Stops should increase from 0 to 1
             stops: [0.1, 0.4, 0.7, 0.9],
-            colors: [
-              // Colors are easy thanks to Flutter's Colors class.
-              HexColor("F2AA52"),
-              HexColor("F2A653"),
-              HexColor("EF5769"),
-              HexColor("EE4B6D"),
-            ],
+            colors: Util().backgroundGradient,
           ),
         ),
 
@@ -78,9 +60,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: GameSelectionWidget(
-                onPressedCallback: () {
-                  debugPrint("Tapped Me");
-                },
+                gameType: GameType.HUMAN_VS_CPU,
                 buttonTitle: "Play Now!",
                 foregroundImage: AssetImage('assets/img/player.png'),
                 subTitle: "Human VS CPU",
@@ -89,9 +69,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: GameSelectionWidget(
-                onPressedCallback: () {
-                  debugPrint("Tapped Me");
-                },
+                gameType: GameType.CPU_VS_CPU,
                 buttonTitle: "Watch Game",
                 foregroundImage: AssetImage('assets/img/cpu_player.png'),
                 subTitle: "CPU VS CPU",

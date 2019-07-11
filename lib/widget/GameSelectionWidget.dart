@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:shifumi/model/GameType.dart';
+import 'package:shifumi/page/GamePage.dart';
 import 'package:shifumi/shape/CustomShape.dart';
 import 'package:shifumi/util/HexColor.dart';
 
 class GameSelectionWidget extends StatelessWidget {
 
-  final GestureTapCallback onPressedCallback;
+  final GameType gameType;
   final String buttonTitle;
   final String subTitle;
   final AssetImage foregroundImage;
 
   GameSelectionWidget({
-      @required this.onPressedCallback,
+      @required this.gameType,
       @required this.buttonTitle,
       @required this.foregroundImage,
       @required this.subTitle
@@ -39,7 +41,6 @@ class GameSelectionWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-
                     Padding(
                       padding:
                       EdgeInsets.only(left: 15.0),
@@ -49,7 +50,16 @@ class GameSelectionWidget extends StatelessWidget {
                             this.buttonTitle,
                             style: Theme.of(context).textTheme.subhead,
                           ),
-                          onPressed: onPressedCallback,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GamePage(
+                                  gameType: this.gameType,
+                                ),
+                              ),
+                            );
+                          },
                           shape: new RoundedRectangleBorder(
                               borderRadius:
                               new BorderRadius.circular(8.0))),
