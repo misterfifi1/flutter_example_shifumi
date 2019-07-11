@@ -36,6 +36,11 @@ class ShifumiApp extends StatelessWidget {
               fontSize: 12.0,
               color: Colors.white
           ),
+            caption: TextStyle(
+                fontSize: 8.0,
+                fontStyle: FontStyle.italic,
+                color: Colors.black45
+          ),
           subhead: TextStyle(
             fontSize: 12.0,
             color: Colors.white,

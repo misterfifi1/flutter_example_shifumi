@@ -83,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 buttonTitle: "Play Now!",
                 foregroundImage: AssetImage('assets/img/player.png'),
+                subTitle: "Human VS CPU",
               ),
               flex: 3,
             ),
@@ -93,6 +94,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 buttonTitle: "Watch Game",
                 foregroundImage: AssetImage('assets/img/cpu_player.png'),
+                subTitle: "CPU VS CPU",
               ),
               flex: 3,
             )

@@ -6,12 +6,14 @@ class GameSelectionWidget extends StatelessWidget {
 
   final GestureTapCallback onPressedCallback;
   final String buttonTitle;
+  final String subTitle;
   final AssetImage foregroundImage;
 
   GameSelectionWidget({
       @required this.onPressedCallback,
       @required this.buttonTitle,
       @required this.foregroundImage,
+      @required this.subTitle
     }
   );
 
@@ -37,9 +39,10 @@ class GameSelectionWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+
                     Padding(
                       padding:
-                      EdgeInsets.only(left: 20.0, bottom: 10),
+                      EdgeInsets.only(left: 15.0),
                       child: RaisedButton(
                           color: HexColor("4EADF3"),
                           child: Text(
@@ -51,7 +54,15 @@ class GameSelectionWidget extends StatelessWidget {
                               borderRadius:
                               new BorderRadius.circular(8.0))),
                     ),
-                  ],
+                    Padding(
+                      padding:
+                      EdgeInsets.only(left: 20.0, bottom: 8),
+                      child: Text(
+                        this.subTitle,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                    ),
+                ],
                 ),
               ),
             ),
