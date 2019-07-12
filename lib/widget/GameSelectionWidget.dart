@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shifumi/model/GameType.dart';
 import 'package:shifumi/page/GamePage.dart';
-import 'package:shifumi/shape/CustomShape.dart';
+import 'package:shifumi/shape/HomeGameSelectionShape.dart';
 import 'package:shifumi/util/HexColor.dart';
 
 class GameSelectionWidget extends StatelessWidget {
@@ -31,7 +31,7 @@ class GameSelectionWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(2.0)),
           child: Container(
             child: ClipPath(
-              clipper: CustomShape(),
+              clipper: HomeGameSelectionShape(),
               //clipBehavior: Clip.antiAliasWithSaveLayer,
               child: Container(
                 color: Colors.white70,

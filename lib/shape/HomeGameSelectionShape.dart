@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class CustomShape extends CustomClipper<Path> {
+class HomeGameSelectionShape extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
 

@@ -31,7 +31,6 @@ class ResultWidget extends StatelessWidget {
       this.message = "Congratulation, you Won!";
     }
 
-
     return Container(
       height: 250,
       child: Padding(
