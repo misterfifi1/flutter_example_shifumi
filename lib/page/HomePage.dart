@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shifumi/model/GameType.dart';
-import 'package:shifumi/util/HexColor.dart';
 import 'package:shifumi/util/Util.dart';
 import 'package:shifumi/widget/GameSelectionWidget.dart';
 

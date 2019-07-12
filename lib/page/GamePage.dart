@@ -1,15 +1,12 @@
 import 'dart:async';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shifumi/model/GameType.dart';
-import 'package:shifumi/shape/TimerPainter.dart';
 import 'package:shifumi/util/Util.dart';
 import 'package:shifumi/widget/ChoiceWidget.dart';
 import 'package:shifumi/widget/ResultWidget.dart';
-import 'package:shifumi/widget/WelcomeWidget.dart';
 
 import 'HomePage.dart';
 
@@ -68,7 +65,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     if (widget.gameType == GameType.CPU_VS_CPU) {
-      _timerValue = 2;
+      _timerValue = 5;
       _ruleMessage = "The CPU is thinking, wait!";
     }
 

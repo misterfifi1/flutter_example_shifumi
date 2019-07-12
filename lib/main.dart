@@ -10,7 +10,7 @@ class ShifumiApp extends StatelessWidget {
     return MaterialApp(
       title: 'Shifumi',
       //debugShowMaterialGrid: true,
-      //debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.blue,
           backgroundColor: Colors.orange,

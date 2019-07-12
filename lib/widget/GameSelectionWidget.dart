@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shifumi/model/GameType.dart';
 import 'package:shifumi/page/GamePage.dart';
 import 'package:shifumi/shape/HomeGameSelectionShape.dart';
+import 'package:shifumi/transition/EnterExitRoute.dart';
 import 'package:shifumi/util/HexColor.dart';
 
 class GameSelectionWidget extends StatelessWidget {
@@ -52,10 +53,9 @@ class GameSelectionWidget extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => GamePage(
-                                  gameType: this.gameType,
+                              context, EnterExitRoute(exitPage:
+                                this, enterPage: GamePage(
+                                  gameType: this.gameType
                                 ),
                               ),
                             );

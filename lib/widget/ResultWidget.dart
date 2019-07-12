@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shifumi/model/GameType.dart';
 import 'package:shifumi/page/GamePage.dart';
 import 'package:shifumi/page/HomePage.dart';
+import 'package:shifumi/transition/EnterExitRoute.dart';
+import 'package:shifumi/transition/ScaleRoute.dart';
 
 class ResultWidget extends StatelessWidget {
 
@@ -81,10 +83,7 @@ class ResultWidget extends StatelessWidget {
                             ),
                             onPressed: () {
                               Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(),
-                                ),
+                                context, ScaleRoute(page: HomePage()),
                               );
                             },
                             shape: new RoundedRectangleBorder(
@@ -105,11 +104,10 @@ class ResultWidget extends StatelessWidget {
                             ),
                             onPressed: () {
                               Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => GamePage(
-                                    gameType: this.gameType,
-                                  ),
+                                context, EnterExitRoute(exitPage:
+                                this, enterPage: GamePage(
+                                    gameType: this.gameType
+                                ),
                                 ),
                               );
                             },
