@@ -4,6 +4,7 @@ import 'package:shifumi/model/GameType.dart';
 import 'package:shifumi/page/GamePage.dart';
 import 'package:shifumi/page/HomePage.dart';
 import 'package:shifumi/transition/EnterExitRoute.dart';
+import 'package:shifumi/transition/FadeRoute.dart';
 import 'package:shifumi/transition/ScaleRoute.dart';
 
 class ResultWidget extends StatelessWidget {
@@ -95,7 +96,7 @@ class ResultWidget extends StatelessWidget {
                               style: Theme.of(context).textTheme.subhead,
                             ),
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context, ScaleRoute(page: HomePage()),
                               );
                             },
@@ -116,10 +117,10 @@ class ResultWidget extends StatelessWidget {
                               style: Theme.of(context).textTheme.subhead,
                             ),
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.of(context).pop();
+                              Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => GamePage(
+                                FadeRoute(page: GamePage(
                                     gameType: this.gameType,
                                   ),
                                 ),
