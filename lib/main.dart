@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shifumi/page/HomePage.dart';
+import 'package:shifumi/util/HexColor.dart';
 
 void main() => runApp(ShifumiApp());
 
@@ -14,6 +15,7 @@ class ShifumiApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
           backgroundColor: Colors.orange,
+          focusColor: Colors.white,
           errorColor: Colors.redAccent,
           textTheme: TextTheme(
               headline: TextStyle(

@@ -6,26 +6,22 @@ import 'package:shifumi/transition/EnterExitRoute.dart';
 import 'package:shifumi/util/HexColor.dart';
 
 class GameSelectionWidget extends StatelessWidget {
-
   final GameType gameType;
   final String buttonTitle;
   final String subTitle;
   final AssetImage foregroundImage;
 
-  GameSelectionWidget({
-      @required this.gameType,
+  GameSelectionWidget(
+      {@required this.gameType,
       @required this.buttonTitle,
       @required this.foregroundImage,
-      @required this.subTitle
-    }
-  );
+      @required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      foregroundDecoration: BoxDecoration(
-          image: DecorationImage(
-              image: this.foregroundImage)),
+      foregroundDecoration:
+          BoxDecoration(image: DecorationImage(image: this.foregroundImage)),
       child: Padding(
         padding: EdgeInsets.only(top: 20.0),
         child: ClipRRect(
@@ -43,8 +39,7 @@ class GameSelectionWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
-                      padding:
-                      EdgeInsets.only(left: 15.0),
+                      padding: EdgeInsets.only(left: 15.0),
                       child: RaisedButton(
                           color: HexColor("4EADF3"),
                           child: Text(
@@ -53,26 +48,24 @@ class GameSelectionWidget extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.push(
-                              context, EnterExitRoute(exitPage:
-                                this, enterPage: GamePage(
-                                  gameType: this.gameType
-                                ),
+                              context,
+                              EnterExitRoute(
+                                exitPage: this,
+                                enterPage: GamePage(gameType: this.gameType),
                               ),
                             );
                           },
                           shape: new RoundedRectangleBorder(
-                              borderRadius:
-                              new BorderRadius.circular(8.0))),
+                              borderRadius: new BorderRadius.circular(8.0))),
                     ),
                     Padding(
-                      padding:
-                      EdgeInsets.only(left: 20.0, bottom: 8),
+                      padding: EdgeInsets.only(left: 20.0, bottom: 8),
                       child: Text(
                         this.subTitle,
                         style: Theme.of(context).textTheme.caption,
                       ),
                     ),
-                ],
+                  ],
                 ),
               ),
             ),

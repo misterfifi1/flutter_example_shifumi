@@ -66,7 +66,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
     super.initState();
     if (widget.gameType == GameType.CPU_VS_CPU) {
       _timerValue = 5;
-      _ruleMessage = "The CPU is thinking, wait!";
+      _ruleMessage = "The CPU is thinking, please wait!";
     }
 
     controller = AnimationController(
@@ -171,14 +171,16 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(8.0)),
                             child: ChoiceWidget(choice: choice),
-                            onPressed: () {
-                              if (widget.gameType == GameType.HUMAN_VS_CPU) {
+                            onPressed: widget.gameType != GameType.HUMAN_VS_CPU ? null : () {
                                 _displayResult(this.context, choice.isWinner());
-                              }
                             },
-                            color: Colors.white54,
+                            disabledColor: Colors.white54,
                             highlightColor: Colors.blueAccent,
+                            color: Theme.of(context).focusColor,
                             splashColor: Colors.blueAccent,
+                            hoverColor: Colors.blueAccent,
+                            elevation: 10,
+                            disabledElevation: 0,
                           ),
                         ),
                         flex: 1,
