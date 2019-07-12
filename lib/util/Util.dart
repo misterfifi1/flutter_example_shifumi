@@ -18,12 +18,10 @@ class Util {
   ];
 
   static List<Choice> gameCards = [
-    new Choice("Rock", "assets/img/game/rock.png", 0),
-    new Choice("Paper", "assets/img/game/paper.png", 1),
-    new Choice("Scissor", "assets/img/game/scissors.png", 2),
+    new Choice("Rock", "assets/img/game/rock.png", 0, 2),
+    new Choice("Paper", "assets/img/game/paper.png", 1, 0),
+    new Choice("Scissor", "assets/img/game/scissors.png", 2, 1),
   ];
-
-  static List<int> solutions = [2,0,1];
 
   static GameResult makeChoiceForUser(){
     final _random = new Random();

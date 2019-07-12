@@ -3,27 +3,23 @@ import 'package:shifumi/model/GameResult.dart';
 import 'package:shifumi/model/GameType.dart';
 import 'package:shifumi/page/GamePage.dart';
 import 'package:shifumi/page/HomePage.dart';
-import 'package:shifumi/transition/EnterExitRoute.dart';
 import 'package:shifumi/transition/FadeRoute.dart';
 import 'package:shifumi/transition/ScaleRoute.dart';
 
 class ResultWidget extends StatelessWidget {
-
   final GameResult isWon;
   final GameType gameType;
   Image resultImage;
   String message;
 
   ResultWidget({
-      @required this.isWon,
-      @required this.gameType,
-    }
-  );
+    @required this.isWon,
+    @required this.gameType,
+  });
 
   @override
   Widget build(BuildContext context) {
-
-    switch(this.isWon){
+    switch (this.isWon) {
       case GameResult.LOST:
         this.resultImage = Image.asset(
           "assets/img/lost.png",
@@ -48,7 +44,6 @@ class ResultWidget extends StatelessWidget {
 
         this.message = "I can't decide, please try again!";
         break;
-
     }
 
     return Container(
@@ -62,9 +57,7 @@ class ResultWidget extends StatelessWidget {
                 flex: 2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    this.resultImage
-                  ],
+                  children: <Widget>[this.resultImage],
                 ),
               ),
               Expanded(
@@ -86,8 +79,7 @@ class ResultWidget extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child:
-                      Padding(
+                      child: Padding(
                         padding: EdgeInsets.only(left: 20.0, right: 20.0),
                         child: RaisedButton(
                             color: Theme.of(context).accentColor,
@@ -97,18 +89,17 @@ class ResultWidget extends StatelessWidget {
                             ),
                             onPressed: () {
                               Navigator.pushReplacement(
-                                context, ScaleRoute(page: HomePage()),
+                                context,
+                                ScaleRoute(page: HomePage()),
                               );
                             },
                             shape: new RoundedRectangleBorder(
-                                borderRadius:
-                                new BorderRadius.circular(8.0))),
+                                borderRadius: new BorderRadius.circular(8.0))),
                       ),
                     ),
                     Expanded(
                       flex: 1,
-                      child:
-                      Padding(
+                      child: Padding(
                         padding: EdgeInsets.only(left: 20.0, right: 20.0),
                         child: RaisedButton(
                             color: Theme.of(context).errorColor,
@@ -120,22 +111,21 @@ class ResultWidget extends StatelessWidget {
                               Navigator.of(context).pop();
                               Navigator.pushReplacement(
                                 context,
-                                FadeRoute(page: GamePage(
+                                FadeRoute(
+                                  page: GamePage(
                                     gameType: this.gameType,
                                   ),
                                 ),
                               );
                             },
                             shape: new RoundedRectangleBorder(
-                                borderRadius:
-                                new BorderRadius.circular(8.0))),
+                                borderRadius: new BorderRadius.circular(8.0))),
                       ),
                     ),
                   ],
                 ),
               ),
-            ]
-        ),
+            ]),
       ),
     );
   }

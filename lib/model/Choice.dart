@@ -8,9 +8,10 @@ class Choice {
 
   final String _name;
   final String _imagePath;
-  final int _weight;
+  final int _identifier;
+  final int _strongerThan;
 
-  Choice(this._name, this._imagePath, this._weight);
+  Choice(this._name, this._imagePath, this._identifier, this._strongerThan);
 
   GameResult isWinner(){
     debugPrint("----------------- (CPU VS PLAYER)");
@@ -18,17 +19,16 @@ class Choice {
     debugPrint(opponentChoice.name + " VS " + this.name);
 
     //Equality
-    if(opponentChoice.weight == this.weight){
+    if(opponentChoice.identifier == this.identifier){
       debugPrint("EQUALITY");
       return GameResult.EQUALITY;
     }
 
     //we read the solution (index vs value = win)
-    if(Util.solutions[this.weight] == opponentChoice.weight){
+    if(this._strongerThan == opponentChoice.identifier){
       debugPrint("Player wins with: " + this.name);
       return GameResult.WON;
     }
-
 
     debugPrint("CPU wins with: " + opponentChoice.name);
     return GameResult.LOST;
@@ -43,6 +43,8 @@ class Choice {
 
   String get name => _name;
 
-  int get weight => _weight;
+  int get identifier => _identifier;
+
+  int get strongerThan => _strongerThan;
 
 }
