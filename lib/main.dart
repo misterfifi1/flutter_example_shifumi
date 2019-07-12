@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shifumi/page/HomePage.dart';
-import 'package:shifumi/util/HexColor.dart';
 
 void main() => runApp(ShifumiApp());
 

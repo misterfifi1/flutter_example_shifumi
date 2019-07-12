@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:shifumi/model/Choice.dart';
+import 'package:shifumi/model/GameResult.dart';
 
 import 'HexColor.dart';
 
@@ -22,7 +23,7 @@ class Util {
     new Choice("Scissor", "assets/img/game/scissors.png", 2),
   ];
 
-  static bool makeChoiceForUser(){
+  static GameResult makeChoiceForUser(){
     final _random = new Random();
     Choice imposedChoice = Util.gameCards[_random.nextInt(Util.gameCards.length)];
     return imposedChoice.isWinner();

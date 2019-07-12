@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shifumi/model/GameResult.dart';
 import 'package:shifumi/model/GameType.dart';
 import 'package:shifumi/page/GamePage.dart';
 import 'package:shifumi/page/HomePage.dart';
@@ -7,7 +8,7 @@ import 'package:shifumi/transition/ScaleRoute.dart';
 
 class ResultWidget extends StatelessWidget {
 
-  final bool isWon;
+  final GameResult isWon;
   final GameType gameType;
   Image resultImage;
   String message;
@@ -21,20 +22,32 @@ class ResultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    this.resultImage = Image.asset(
-      "assets/img/lost.png",
-      height: 150,
-    );
+    switch(this.isWon){
+      case GameResult.LOST:
+        this.resultImage = Image.asset(
+          "assets/img/lost.png",
+          height: 150,
+        );
+        this.message = "You lost, do you want to retry?";
+        break;
+      case GameResult.WON:
+        this.resultImage = Image.asset(
+          "assets/img/winner.png",
+          height: 150,
+        );
 
-    this.message = "You lost, do you want to retry?";
+        this.message = "Congratulation, you Won!";
+        break;
+      case GameResult.EQUALITY:
+      default:
+        this.resultImage = Image.asset(
+          "assets/img/equality.png",
+          height: 150,
+        );
 
-    if(this.isWon){
-      this.resultImage = Image.asset(
-        "assets/img/winner.png",
-        height: 150,
-      );
+        this.message = "I can't decide, please try again!";
+        break;
 
-      this.message = "Congratulation, you Won!";
     }
 
     return Container(
@@ -104,10 +117,11 @@ class ResultWidget extends StatelessWidget {
                             ),
                             onPressed: () {
                               Navigator.push(
-                                context, EnterExitRoute(exitPage:
-                                this, enterPage: GamePage(
-                                    gameType: this.gameType
-                                ),
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GamePage(
+                                    gameType: this.gameType,
+                                  ),
                                 ),
                               );
                             },

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shifumi/model/GameResult.dart';
 import 'package:shifumi/model/GameType.dart';
 import 'package:shifumi/util/Util.dart';
 import 'package:shifumi/widget/ChoiceWidget.dart';
@@ -29,7 +30,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
 
   String _ruleMessage = "Make your choice!";
 
-  void _displayResult(context, bool result) {
+  void _displayResult(context, GameResult result) {
     _stopTimers();
     showModalBottomSheet<void>(
         context: context,

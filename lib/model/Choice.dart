@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+import 'package:shifumi/model/GameResult.dart';
 import 'package:shifumi/util/Util.dart';
 
 class Choice {
@@ -10,14 +12,25 @@ class Choice {
 
   Choice(this._name, this._imagePath, this._weight);
 
-  bool isWinner(){
+  GameResult isWinner(){
+    debugPrint("-----------------");
     Choice opponentChoice = this._getRandomOpponentChoice();
+    debugPrint(opponentChoice.name + " VS " + this.name);
+
+    //Equality
+    if(opponentChoice._weight == this._weight){
+      return GameResult.EQUALITY;
+    }
+
+    //other possibilities
     if(opponentChoice._weight < this._weight ||
         (this._weight == 0 && opponentChoice._weight == 2)
     ){
-      return true;
+      debugPrint("Player wins with: " + this.name);
+      return GameResult.WON;
     }
-    return false;
+    debugPrint("CPU wins with: " + opponentChoice.name);
+    return GameResult.LOST;
   }
 
   Choice _getRandomOpponentChoice(){
