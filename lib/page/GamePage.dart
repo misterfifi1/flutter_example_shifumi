@@ -14,7 +14,6 @@ class GamePage extends StatefulWidget {
   GamePage({Key key, @required this.gameType}) : super(key: key);
   final GameType gameType;
 
-
   @override
   _GamePageState createState() {
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -35,9 +34,10 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext bc) {
-          return Container(child: ResultWidget(
-              isWon: result,
-              gameType: widget.gameType,
+          return Container(
+              child: ResultWidget(
+            isWon: result,
+            gameType: widget.gameType,
           ));
         });
   }
@@ -80,7 +80,6 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
     });
   }
 
-
   @override
   void dispose() {
     super.dispose();
@@ -89,7 +88,6 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     _startController();
 
     return Scaffold(
@@ -174,9 +172,8 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
                                 borderRadius: new BorderRadius.circular(8.0)),
                             child: ChoiceWidget(choice: choice),
                             onPressed: () {
-                              if(widget.gameType == GameType.HUMAN_VS_CPU) {
-                                _displayResult(
-                                    this.context, choice.isWinner());
+                              if (widget.gameType == GameType.HUMAN_VS_CPU) {
+                                _displayResult(this.context, choice.isWinner());
                               }
                             },
                             color: Colors.white54,
@@ -192,8 +189,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
               ),
               Expanded(
                 flex: 1,
-                child:
-                Padding(
+                child: Padding(
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                   child: RaisedButton(
                       color: Theme.of(context).accentColor,
@@ -211,8 +207,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
                         );
                       },
                       shape: new RoundedRectangleBorder(
-                          borderRadius:
-                          new BorderRadius.circular(8.0))),
+                          borderRadius: new BorderRadius.circular(8.0))),
                 ),
               ),
             ],
