@@ -13,22 +13,23 @@ class Choice {
   Choice(this._name, this._imagePath, this._weight);
 
   GameResult isWinner(){
-    debugPrint("-----------------");
+    debugPrint("----------------- (CPU VS PLAYER)");
     Choice opponentChoice = this._getRandomOpponentChoice();
     debugPrint(opponentChoice.name + " VS " + this.name);
 
     //Equality
-    if(opponentChoice._weight == this._weight){
+    if(opponentChoice.weight == this.weight){
+      debugPrint("EQUALITY");
       return GameResult.EQUALITY;
     }
 
-    //other possibilities
-    if(opponentChoice._weight < this._weight ||
-        (this._weight == 0 && opponentChoice._weight == 2)
-    ){
+    //we read the solution (index vs value = win)
+    if(Util.solutions[this.weight] == opponentChoice.weight){
       debugPrint("Player wins with: " + this.name);
       return GameResult.WON;
     }
+
+
     debugPrint("CPU wins with: " + opponentChoice.name);
     return GameResult.LOST;
   }
@@ -41,5 +42,7 @@ class Choice {
   String get imagePath => _imagePath;
 
   String get name => _name;
+
+  int get weight => _weight;
 
 }

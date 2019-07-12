@@ -23,6 +23,8 @@ class Util {
     new Choice("Scissor", "assets/img/game/scissors.png", 2),
   ];
 
+  static List<int> solutions = [2,0,1];
+
   static GameResult makeChoiceForUser(){
     final _random = new Random();
     Choice imposedChoice = Util.gameCards[_random.nextInt(Util.gameCards.length)];
