@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:shifumi/util/HexColor.dart';
+import 'package:shifumi/model/GameType.dart';
+import 'package:shifumi/page/GamePage.dart';
+import 'package:shifumi/page/HomePage.dart';
 
 class ResultWidget extends StatelessWidget {
 
   final bool isWon;
+  final GameType gameType;
   Image resultImage;
   String message;
 
   ResultWidget({
       @required this.isWon,
+      @required this.gameType,
     }
   );
 
@@ -76,7 +80,12 @@ class ResultWidget extends StatelessWidget {
                               style: Theme.of(context).textTheme.subhead,
                             ),
                             onPressed: () {
-                              debugPrint("fdsdf");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomePage(),
+                                ),
+                              );
                             },
                             shape: new RoundedRectangleBorder(
                                 borderRadius:
@@ -95,7 +104,14 @@ class ResultWidget extends StatelessWidget {
                               style: Theme.of(context).textTheme.subhead,
                             ),
                             onPressed: () {
-                              debugPrint("fdsdf");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GamePage(
+                                    gameType: this.gameType,
+                                  ),
+                                ),
+                              );
                             },
                             shape: new RoundedRectangleBorder(
                                 borderRadius:

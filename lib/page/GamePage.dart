@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -5,13 +7,16 @@ import 'package:flutter/services.dart';
 import 'package:shifumi/model/GameType.dart';
 import 'package:shifumi/shape/TimerPainter.dart';
 import 'package:shifumi/util/Util.dart';
-import 'package:shifumi/widget/CpuWidget.dart';
+import 'package:shifumi/widget/ChoiceWidget.dart';
 import 'package:shifumi/widget/ResultWidget.dart';
 import 'package:shifumi/widget/WelcomeWidget.dart';
+
+import 'HomePage.dart';
 
 class GamePage extends StatefulWidget {
   GamePage({Key key, @required this.gameType}) : super(key: key);
   final GameType gameType;
+
 
   @override
   _GamePageState createState() {
@@ -22,12 +27,21 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
   AnimationController controller;
+  static const String FLARE_ANIMATION = "Cargando";
+  int _timerValue = 10;
+  Timer _timer;
 
-  void _settingModalBottomSheet(context) {
-    showModalBottomSheet(
+  String _ruleMessage = "Make your choice!";
+
+  void _displayResult(context, bool result) {
+    _stopTimers();
+    showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext bc) {
-          return Container(child: ResultWidget(isWon: false));
+          return Container(child: ResultWidget(
+              isWon: result,
+              gameType: widget.gameType,
+          ));
         });
   }
 
@@ -36,10 +50,13 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
       controller.stop();
     else {
       controller.reverse(
-          from: controller.value == 0.0
-              ? 1.0
-              : controller.value);
+          from: controller.value == 0.0 ? 1.0 : controller.value);
     }
+  }
+
+  void _stopTimers() {
+    _timer.cancel();
+    if (controller.isAnimating) controller.stop();
   }
 
   String get timerString {
@@ -50,30 +67,37 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    if (widget.gameType == GameType.CPU_VS_CPU) {
+      _timerValue = 2;
+      _ruleMessage = "The CPU is thinking, wait!";
+    }
+
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 100),
+      duration: Duration(seconds: _timerValue),
     );
+
+    _timer = new Timer(Duration(seconds: _timerValue), () {
+      _displayResult(context, Util.makeChoiceForUser());
+      this._timer.cancel();
+    });
+  }
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.gameType == GameType.HUMAN_VS_CPU) {
-      //TODO finir le taf
-    }
 
     _startController();
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
       resizeToAvoidBottomPadding: true,
-      floatingActionButton: new FloatingActionButton(
-        onPressed: () {
-          //_settingModalBottomSheet(context);
-          _startController();
-        },
-        child: new Icon(Icons.add),
-      ),
       body: Container(
         decoration: BoxDecoration(
           // Box decoration takes a gradient
@@ -108,7 +132,8 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
                 flex: 1,
               ),
               Expanded(
-                child: FlareActor('assets/anim/robot.flr', animation: 'activate'),
+                child: FlareActor('assets/anim/robot.flr',
+                    animation: FLARE_ANIMATION),
                 flex: 3,
               ),
               Expanded(
@@ -121,17 +146,18 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Hurry UP!",
+                            _ruleMessage,
+                            textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.body2,
                           ),
                           AnimatedBuilder(
-                          animation: controller,
-                          builder: (BuildContext context, Widget child) {
-                            return Text(
-                              timerString,
-                              style: Theme.of(context).textTheme.body2,
-                            );
-                        }),
+                              animation: controller,
+                              builder: (BuildContext context, Widget child) {
+                                return Text(
+                                  timerString,
+                                  style: Theme.of(context).textTheme.body2,
+                                );
+                              }),
                         ],
                       ),
                     ),
@@ -142,22 +168,56 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
               Expanded(
                 child: Row(
                   children: <Widget>[
-                    Expanded(
-                      child: ChoiceWidget(),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: ChoiceWidget(),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: ChoiceWidget(),
-                      flex: 1,
-                    ),
+                    for (var choice in Util.gameCards)
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: RaisedButton(
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(8.0)),
+                            child: ChoiceWidget(choice: choice),
+                            onPressed: () {
+                              if(widget.gameType == GameType.HUMAN_VS_CPU) {
+                                _displayResult(
+                                    this.context, choice.isWinner());
+                              }
+                            },
+                            color: Colors.white54,
+                            highlightColor: Colors.blueAccent,
+                            splashColor: Colors.blueAccent,
+                          ),
+                        ),
+                        flex: 1,
+                      ),
                   ],
                 ),
                 flex: 3,
-              )
+              ),
+              Expanded(
+                flex: 1,
+                child:
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: RaisedButton(
+                      color: Theme.of(context).accentColor,
+                      child: Text(
+                        "Back to Home",
+                        style: Theme.of(context).textTheme.subhead,
+                      ),
+                      onPressed: () {
+                        _stopTimers();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      },
+                      shape: new RoundedRectangleBorder(
+                          borderRadius:
+                          new BorderRadius.circular(8.0))),
+                ),
+              ),
             ],
           )),
         ),
